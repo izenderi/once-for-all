@@ -39,6 +39,10 @@ class DataProvider:
 
     @staticmethod
     def random_sample_valid_set(train_size, valid_size):
+
+        print("train size is:",train_size)
+        print("valid size is:",valid_size)
+
         assert train_size > valid_size
 
         g = torch.Generator()
