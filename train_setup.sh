@@ -1,0 +1,1 @@
+horovodrun -np 32 python train_ofa_net.py
