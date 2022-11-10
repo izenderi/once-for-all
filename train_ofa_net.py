@@ -131,6 +131,9 @@ args.kd_type = "ce"
 if __name__ == "__main__":
     os.makedirs(args.path, exist_ok=True)
 
+    # import pdb
+    # pdb.set_trace
+
     # Initialize Horovod
     hvd.init()
     # Pin GPU to be used to process local rank (one GPU per process)

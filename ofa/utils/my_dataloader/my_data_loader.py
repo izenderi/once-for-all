@@ -328,10 +328,10 @@ class MyDataLoader(object):
         super(MyDataLoader, self).__setattr__(attr, val)
 
     def __iter__(self):
-        if self.num_workers == 0:
-            return _SingleProcessDataLoaderIter(self)
-        else:
-            return _MultiProcessingDataLoaderIter(self)
+        # if self.num_workers == 0:
+        return _SingleProcessDataLoaderIter(self)
+        # else:
+        #     return _MultiProcessingDataLoaderIter(self)
 
     @property
     def _auto_collation(self):
@@ -434,7 +434,7 @@ class _SingleProcessDataLoaderIter(_BaseDataLoaderIter):
     def __init__(self, loader):
         super(_SingleProcessDataLoaderIter, self).__init__(loader)
         assert self._timeout == 0
-        assert self._num_workers == 0
+        # assert self._num_workers == 0
 
         self._dataset_fetcher = _DatasetKind.create_fetcher(
             self._dataset_kind,

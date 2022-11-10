@@ -118,3 +118,6 @@ venv.bak/
 /tutorial/.torch
 tutorial/tutorial/*
 tutorial/local_lut.npy
+tutorial/*
+
+.torch/*
