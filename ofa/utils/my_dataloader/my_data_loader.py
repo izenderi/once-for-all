@@ -328,10 +328,10 @@ class MyDataLoader(object):
         super(MyDataLoader, self).__setattr__(attr, val)
 
     def __iter__(self):
-        if self.num_workers == 0:
-            return _SingleProcessDataLoaderIter(self)
-        else:
-            return _MultiProcessingDataLoaderIter(self)
+        # if self.num_workers == 0:
+        return _SingleProcessDataLoaderIter(self)
+        # else:
+        #     return _MultiProcessingDataLoaderIter(self)
 
     @property
     def _auto_collation(self):
@@ -434,7 +434,7 @@ class _SingleProcessDataLoaderIter(_BaseDataLoaderIter):
     def __init__(self, loader):
         super(_SingleProcessDataLoaderIter, self).__init__(loader)
         assert self._timeout == 0
-        assert self._num_workers == 0
+        # assert self._num_workers == 0
 
         self._dataset_fetcher = _DatasetKind.create_fetcher(
             self._dataset_kind,
@@ -800,7 +800,11 @@ class _MultiProcessingDataLoaderIter(_BaseDataLoaderIter):
 
         if self._pin_memory:
             self._pin_memory_thread_done_event = threading.Event()
-            self._data_queue = queue.Queue()
+
+            # import pdb
+            # pdb.set_trace()
+
+            self._data_queue = multiprocessing.Queue()
             pin_memory_thread = threading.Thread(
                 target=_utils.pin_memory._pin_memory_loop,
                 args=(
@@ -880,16 +884,16 @@ class _MultiProcessingDataLoaderIter(_BaseDataLoaderIter):
                 raise RuntimeError(
                     "DataLoader timed out after {} seconds".format(self._timeout)
                 )
-        elif self._pin_memory:
-            while self._pin_memory_thread.is_alive():
-                success, data = self._try_get_data()
-                if success:
-                    return data
-            else:
-                # while condition is false, i.e., pin_memory_thread died.
-                raise RuntimeError("Pin memory thread exited unexpectedly")
-            # In this case, `self._data_queue` is a `queue.Queue`,. But we don't
-            # need to call `.task_done()` because we don't use `.join()`.
+        # elif self._pin_memory:
+        #     while self._pin_memory_thread.is_alive():
+        #         success, data = self._try_get_data()
+        #         if success:
+        #             return data
+        #     else:
+        #         # while condition is false, i.e., pin_memory_thread died.
+        #         raise RuntimeError("Pin memory thread exited unexpectedly")
+        #     # In this case, `self._data_queue` is a `queue.Queue`,. But we don't
+        #     # need to call `.task_done()` because we don't use `.join()`.
         else:
             while True:
                 success, data = self._try_get_data()

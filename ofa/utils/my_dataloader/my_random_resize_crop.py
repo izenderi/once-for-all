@@ -83,7 +83,12 @@ class MyRandomResizedCrop(transforms.RandomResizedCrop):
         )[0]
 
     def __repr__(self):
-        interpolate_str = _pil_interpolation_to_str[self.interpolation]
+
+        # import pdb
+        # pdb.set_trace()
+
+        # interpolate_str = _pil_interpolation_to_str[self.interpolation] # original
+        interpolate_str = _pil_interpolation_to_str[Image.BILINEAR]
         format_string = self.__class__.__name__ + "(size={0}".format(
             MyRandomResizedCrop.IMAGE_SIZE_LIST
         )

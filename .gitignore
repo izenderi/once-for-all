@@ -113,3 +113,11 @@ venv.bak/
 *.xml
 *.iml
 /bash/distributed_imagenet.sh
+
+# ignore tutorial images
+/tutorial/.torch
+tutorial/tutorial/*
+tutorial/local_lut.npy
+tutorial/*
+
+.torch/*
