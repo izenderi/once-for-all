@@ -30,8 +30,8 @@ parser.add_argument(
     metavar="OFANET",
     default="ofa_resnet50",
     choices=[
-        "ofa_mbv3_d234_e346_k357_w1.0",
-        "ofa_mbv3_d234_e346_k357_w1.2",
+        "ofa_mbv3_d234_e346_k357_w1.0", # OFAMobileNetV3 width 1.0
+        "ofa_mbv3_d234_e346_k357_w1.2", # OFAMobileNetV3 width 1.2
         "ofa_proxyless_d234_e346_k357_w1.3",
         "ofa_resnet50",
     ],
@@ -60,6 +60,13 @@ run_config = ImagenetRunConfig(test_batch_size=args.batch_size, n_worker=args.wo
 """
 ofa_network.sample_active_subnet()
 subnet = ofa_network.get_active_subnet(preserve_weight=True)
+
+# ofa_v3 = ofa_net("ofa_mbv3_d234_e346_k357_w1.2", pretrained=False)
+
+import pdb
+pdb.set_trace()
+
+# subnet = torch.load("exp/kernel_depth2kernel_depth_width/phase2/checkpoint/model_best.pth.tar")
 
 """ Test sampled subnet 
 """
