@@ -1,1 +1,0 @@
-exp/kernel_depth2kernel_depth_width/phase2/checkpoint/checkpoint.pth.tar
