@@ -91,7 +91,7 @@ specialized_network_list = [
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "-p", "--path", help="The path of imagenet", type=str, default="/dataset/imagenet"
+    "-p", "--path", help="The path of imagenet", type=str, default="/home/johnson/dataset/imagenet/"
 )
 parser.add_argument("-g", "--gpu", help="The gpu(s) to use", type=str, default="all")
 parser.add_argument(
